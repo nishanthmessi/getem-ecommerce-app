@@ -1,14 +1,15 @@
 const express = require('express')
 const cors = require('cors')
+const env = require('dotenv')
 const bodyParser = require('body-parser')
-const stripe = require('stripe')('sk_test_51LziRvSH8BwVG4ydBvlIWWwVFWSfsPujDlTKBsjhR0wUg83q4w2l9YBGHUhNuVGjIzyvUzJhmxbdUsfn7GBhpH9700ofZ9Hs61')
+const stripe = require('stripe')(process.env.STRIPE_TEST_API_KEY)
 
+env.config()
 const app = express()
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(cors())
-// app.use(express.json())
 
 app.get('/', (req,res) => {
   res.send('Home')
@@ -38,4 +39,4 @@ app.post('/checkout', async(req, res) => {
   }))
 })
 
-app.listen(8000, () => console.log("listening to port 8000"))
+app.listen(process.env.PORT, () => console.log(`listening to port: ${process.env.PORT}`))

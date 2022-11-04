@@ -9,7 +9,7 @@ const Modal = () => {
   const productsCount = cart.items.reduce((sum, product) => sum + product.quantity, 0)
 
   const checkout = async () => {
-    await fetch('http://localhost:8000/checkout', {
+    await fetch('https://getem-ecommerce-app.herokuapp.com/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
